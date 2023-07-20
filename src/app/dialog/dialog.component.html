@@ -1,0 +1,20 @@
+<h1 mat-dialog-title *ngIf="data.title">{{ data.title }}</h1>
+<div mat-dialog-content>
+  <p>{{ data.content }}</p>
+</div>
+<div mat-dialog-actions class="submitButton">
+  <button
+    mat-button
+    *ngIf="data.confirmWord"
+    (click)="data.confirmFunction(); onNoClick()"
+  >
+    {{ data.confirmWord }}
+  </button>
+  <button
+    mat-button
+    *ngIf="data.closeWord"
+    (click)="data.closeFunction(); onNoClick()"
+  >
+    {{ data.closeWord }}
+  </button>
+</div>

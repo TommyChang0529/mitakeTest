@@ -1,0 +1,18 @@
+button {
+  width: 100%;
+  border: none;
+  height: 35px;
+  &:nth-child(1) {
+    background-color: #00bfff;
+    color: white;
+  }
+  &:nth-child(2) {
+    background-color: #e3e3e3;
+    color: gray;
+  }
+}
+
+.submitButton {
+  flex-wrap: nowrap;
+  flex-direction: row-reverse;
+}

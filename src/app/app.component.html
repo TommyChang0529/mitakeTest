@@ -1,0 +1,116 @@
+<!-- Toolbar -->
+<div class="toolbar">
+  <img width="20" src=".\assets\burger_gray.svg" />
+</div>
+<div
+  class="toolbar"
+  style="justify-content: center; font-size: 20px"
+  role="banner"
+>
+  <div><span>會員登入</span></div>
+</div>
+
+<div class="content" role="main">
+  <!-- Title -->
+  <div class="title between break">會員登入</div>
+  <!-- Input -->
+  <div class="inputArea break">
+    <form *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="login()">
+      <div class="input">
+        <input
+          type="text"
+          placeholder="請輸入帳號"
+          autocomplete="off"
+          [(ngModel)]="acc"
+          formControlName="acc"
+          [value]="showAcc ? acc : encode(acc)"
+          required
+          (change)="modifyAcc()"
+        />
+        <div class="eyelash" (click)="showAcc = !showAcc">
+          <img src=".\assets\eye_{{ showAcc ? 'open' : 'close' }}.svg" />
+        </div>
+        <div class="notice" (click)="openDialog('acc_notice')">
+          <img src=".\assets\exclamation.svg" />
+        </div>
+        <span class="validate" #accValidate>{{ getErrorMessage("acc") }}</span>
+        <!-- <div
+          class="validate"
+          *ngIf="accInput.invalid && (accInput.dirty || accInput.touched)"
+        >
+          必填欄位
+        </div> -->
+      </div>
+      <div class="input">
+        <input
+          type="text"
+          placeholder="請輸入使用者代碼"
+          autocomplete="off"
+          [(ngModel)]="userID"
+          [value]="showUserID ? userID : encode(userID)"
+          formControlName="userID"
+          required
+          pattern="^[a-zA-Z\d]{6,20}$"
+        />
+        <div class="eyelash" (click)="showUserID = !showUserID">
+          <img src=".\assets\eye_{{ showUserID ? 'open' : 'close' }}.svg" />
+        </div>
+        <div class="notice" (click)="openDialog('userID_notice')">
+          <img src=".\assets\exclamation.svg" />
+        </div>
+        <span class="validate" #userIDValidate>{{
+          getErrorMessage("userID")
+        }}</span>
+
+        <!-- <div
+          class="validate"
+          *ngIf="
+            userIDInput.invalid && (userIDInput.dirty || userIDInput.touched)
+          "
+        >
+          <div *ngIf="userIDInput.errors?.['required']">
+            請輸入6-20碼英數符號
+          </div>
+          <div *ngIf="userIDInput.errors?.['pattern']">輸入長度不符合規則</div>
+        </div> -->
+      </div>
+      <div class="input">
+        <input
+          type="text"
+          placeholder="請輸入密碼"
+          autocomplete="off"
+          [(ngModel)]="pw"
+          [value]="showPw ? pw : encode(pw)"
+          formControlName="pw"
+          required
+          pattern="^[a-zA-Z\d]{8,12}$"
+        />
+        <div class="eyelash" (click)="showPw = !showPw">
+          <img src=".\assets\eye_{{ showPw ? 'open' : 'close' }}.svg" />
+        </div>
+        <div class="notice"></div>
+        <span class="validate" #pwValidate>{{ getErrorMessage("pw") }}</span>
+      </div>
+    </form>
+  </div>
+  <!-- Remember -->
+  <div class="between break">
+    <div class="keppUser">
+      <input type="checkbox" [(ngModel)]="keepAcc" (click)="clickKeepAcc()" />
+      <span for="keepAcc">記住登入帳號</span>
+    </div>
+    <div class="button" mat-button (click)="openDialog('acc_notice')">
+      設定簡易登入
+    </div>
+  </div>
+  <!-- Submit -->
+  <div class="submit break">
+    <button (click)="login()">登入</button>
+    <button><a [href]="setUserIDUrl">我要設定使用者名稱</a></button>
+  </div>
+  <!-- Function -->
+  <div class="between break">
+    <a [href]="registerUrl" class="button">我要註冊</a>
+    <a [href]="forgetUrl" class="button">忘記使用者名稱或密碼</a>
+  </div>
+</div>
